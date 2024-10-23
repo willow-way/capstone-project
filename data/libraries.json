@@ -1,0 +1,366 @@
+[
+    {
+        "name": "National Library / Lee Kong Chian Reference Library",
+        "address": "100 Victoria Street, Singapore 188064",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "National Archives of Singapore",
+        "address": "1 Canning Rise, Singapore 179868",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "staffed_service_hours": "Mon – Fri: 10:00 AM – 06:30 PM",
+            "exceptions": [
+                "Staff service not available on Saturdays, Sundays, Public Holidays and substituted Public Holidays",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Ang Mo Kio Public Library",
+        "address": "4300 Ang Mo Kio Avenue 6, Singapore 569842",
+        "region": "North-East",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Bedok Public Library",
+        "address": "11 Bedok North Street 1, #02-03 & #03-04, Singapore 469662",
+        "region": "East",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Bishan Public Library",
+        "address": "5 Bishan Place, #01-01, Singapore 579841",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Bukit Batok Public Library",
+        "address": "1 Bukit Batok Central Link, #03-01, Singapore 658713",
+        "region": "West",
+        "opening_hours": {
+            "general": "Closed for renovations",
+            "note": "Visit NLB's pilot initiative, \"Browse-n-Borrow\" at West Mall, level 2"
+        }
+    },
+    {
+        "name": "Bukit Panjang Public Library",
+        "address": "1 Jelebu Road, #04-04 & 16/17, Singapore 677743",
+        "region": "West",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Central Public Library",
+        "address": "100 Victoria Street, Singapore 188064",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5:00 PM on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Cheng San Public Library",
+        "address": "90 Hougang Avenue 10, #03-11, Singapore 538766",
+        "region": "North-East",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Choa Chu Kang Public Library",
+        "address": "21 Choa Chu Kang Ave 4, #04-01/02 and #05-06, Singapore 689812",
+        "region": "West",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ],
+            "study_multimedia_zone": "9:00 AM – 10:00 PM (including Public Holidays, eves of Christmas, New Year, and Chinese New Year)"
+        }
+    },
+    {
+        "name": "Clementi Public Library",
+        "address": "3155 Commonwealth Avenue West, #05-13/14/15, Singapore 129588",
+        "region": "West",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Geylang East Public Library",
+        "address": "50 Geylang East Ave 1, Singapore 389777",
+        "region": "East",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Jurong Regional Library",
+        "address": "21 Jurong East Central 1, Singapore 609732",
+        "region": "West",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Jurong West Public Library",
+        "address": "60 Jurong West Central 3, #01-03, Singapore 648346",
+        "region": "West",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "library@chinatown",
+        "address": "133 New Bridge Road, #04-12, Singapore 059413",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "library@esplanade",
+        "address": "8 Raffles Avenue, #03-01, Singapore 039802",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Closed from 1 July 2023",
+            "note": "Performing arts collections, services, and programmes will be centralised at the National Library Building from the second half of 2024"
+        }
+    },
+    {
+        "name": "library@harbourfront",
+        "address": "1 Harbourfront Walk, #03-05 (Lobby F), Singapore 098585",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "extended_hours": "9:00 AM – 11AM",
+            "staff_assisted_services": "Staff-assisted services will commence at 11 AM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "library@orchard",
+        "address": "277 Orchard Road, #03-12 / #04-11, Singapore 238858",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Marine Parade Public Library",
+        "address": "278 Marine Parade Road, #01-02, Singapore 449282",
+        "region": "East",
+        "opening_hours": {
+            "general": "Book Dispenser @ Marine Parade is accessible all day outside FairPrice Finest at 6 Marine Parade Central"
+        }
+    },
+    {
+        "name": "Pasir Ris Public Library",
+        "address": "1 Pasir Ris Central St 3, #04-01/06, Singapore 518457",
+        "region": "East",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Punggol Regional Library",
+        "address": "1 Punggol Drive, #01-12, Singapore 828629",
+        "region": "North-East",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5:00 PM on eves of Christmas, New Year, and Chinese New Year",
+                "Closed on Public Holidays"
+            ],
+            "study_zone": "9:00 AM – 10:00 PM daily (including Public Holidays, eves of Christmas, New Year, and Chinese New Year)",
+            "study_zone_access": "Study Zone is accessible from Level 3 via Lift Lobby B of One Punggol"
+        }
+    },
+    {
+        "name": "Queenstown Public Library",
+        "address": "53 Margaret Drive, Singapore 149297",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Sembawang Public Library",
+        "address": "30 Sembawang Drive, #05-01, Singapore 757713",
+        "region": "North",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Sengkang Public Library",
+        "address": "1 Sengkang Square, #03-28 & #04-19, Singapore 545078",
+        "region": "North-East",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Serangoon Public Library",
+        "address": "23 Serangoon Central, #04-82/83, Singapore 556083",
+        "region": "North-East",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Singapore Botanic Gardens’ Library",
+        "address": "1 Cluny Rd, Level 1, Botany Centre, Tanglin Entrance, Singapore Botanic Gardens, Singapore 259569",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Closed to facilitate the digitalisation of Herbarium and Library & Archive collections from 16 Sept 2024 to 2027"
+        }
+    },
+    {
+        "name": "Tampines Regional Library",
+        "address": "1 Tampines Walk, #02-01, Singapore 528523",
+        "region": "East",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "The LLiBrary",
+        "address": "11 Eunos Road 8, #03-02 (Via Lobby B), Singapore 408601",
+        "region": "East",
+        "opening_hours": {
+            "general": "Mon - Sat: 08:30 AM - 10:00 PM",
+            "exceptions": [
+                "Closed on Sundays and public holidays (including substituted holidays)",
+                "Closed at 5pm on eves of Christmas New Year and Chinese New Year"
+            ]
+        }
+    },
+    {
+        "name": "Toa Payoh Public Library",
+        "address": "6 Toa Payoh Central, Singapore 319191",
+        "region": "Central",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Woodlands Regional Library",
+        "address": "900 South Woodlands Drive, #01-03, Singapore 730900",
+        "region": "North",
+        "opening_hours": {
+            "general": "Mon - Sun: 10:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    },
+    {
+        "name": "Yishun Public Library",
+        "address": "930 Yishun Ave 2, #04-01, Singapore 769098",
+        "region": "North",
+        "opening_hours": {
+            "general": "Mon - Sun: 11:00 AM - 09:00 PM",
+            "exceptions": [
+                "Closed at 5.00pm on eves of Christmas, New Year and Chinese New Year",
+                "Closed on Public Holidays"
+            ]
+        }
+    }
+]
