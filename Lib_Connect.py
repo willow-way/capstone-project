@@ -1,9 +1,4 @@
-#__import__('pysqlite3')
-#import sys
-#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
 import streamlit as st
-import sqlite3
 from logics.data_collector import LibraryMembershipDataCollector
 from logics.library_search import generate_search_url, handle_query_intent, extract_search_terms
 from logics.library_locations import load_library_locations, search_library_locations
