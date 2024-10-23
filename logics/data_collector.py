@@ -1,18 +1,11 @@
-#__import__('pysqlite3')
-#import sys
-#sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
-import chromadb
-from chromadb.config import Settings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from helper_functions.llm import get_completion, get_embedding
-
 
 class LibraryMembershipDataCollector:
     def __init__(self, text_path):
         self.text_path = text_path
         self.membership_data = self._load_membership_data()
-        self.vector_store = self._process_membership_data()
+        self.vector_store = self._process_membership_data()  # Directly store processed data
 
     def _load_membership_data(self):
         """Load membership data from the specified text file."""
@@ -35,21 +28,11 @@ class LibraryMembershipDataCollector:
         chunks = text_splitter.split_text(self.membership_data)
         print(f"Chunks created: {len(chunks)}")
 
-        # Initialize Chroma client
-        client_settings = Settings(persist_directory="./chroma_data")
-        chroma_client = chromadb.PersistentClient(settings=client_settings)
-
-        # Create or retrieve a Chroma collection
-        collection_name = "library_membership"
-        if collection_name in [col.name for col in chroma_client.list_collections()]:
-            chroma_client.delete_collection(name=collection_name)
-
-        collection = chroma_client.create_collection(name=collection_name)
-
-        # Process chunks and add to collection
+        processed_data = []  # Store processed chunks and their embeddings
+        
         for i, chunk in enumerate(chunks):
             embedding = get_embedding(chunk, model='text-embedding-ada-002')
-            
+
             if embedding is None:
                 print(f"Skipping Chunk {i} - failed to generate embedding.")
                 continue
@@ -59,12 +42,13 @@ class LibraryMembershipDataCollector:
                 continue
             
             print(f"Chunk {i} embedding dimension: {len(embedding)}")
-            collection.add(documents=[chunk], embeddings=[embedding], ids=[str(i)])
+            processed_data.append({
+                'document': chunk,
+                'embedding': embedding,
+                'id': str(i)
+            })
 
-        return collection    
-
-
-
+        return processed_data  # Return the processed data
 
     def _extract_membership_types(self, context):
         membership_types = []
@@ -72,7 +56,6 @@ class LibraryMembershipDataCollector:
             if "membership" in line.lower():
                 membership_types.append(line.strip())
         return "; ".join(membership_types) if membership_types else "various membership types"
-
 
     def answer_query(self, user_query):
         try:
@@ -106,12 +89,13 @@ class LibraryMembershipDataCollector:
             query_embedding = get_embedding(user_query, model='text-embedding-ada-002')
             if query_embedding is None:
                 raise ValueError("Failed to generate query embedding")
+
+            # Retrieve the relevant context based on embedding similarity or simply return processed data
+            documents = [data['document'] for data in self.vector_store]  # Fetch all processed documents
             
-            results = self.vector_store.query(query_embeddings=[query_embedding], n_results=10)  # Increased from 5 to 10
-            documents = results['documents'][0] if 'documents' in results and results['documents'] else []
             if not documents:
                 return "No relevant context found."
-            return "\n".join(documents)
+            return "\n".join(documents)  # Return all documents for now
         except Exception as e:
             print(f"Error during context retrieval: {str(e)}")
             return f"Error retrieving context: {str(e)}"
