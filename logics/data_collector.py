@@ -1,14 +1,13 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 import chromadb
 from chromadb.config import Settings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from helper_functions.llm import get_completion, get_embedding
 
-# Attempt to use pysqlite3 instead of sqlite3
-try:
-    import pysqlite3 as sqlite3
-except ImportError:
-    import sqlite3  # Fallback to sqlite3 if pysqlite3 is not available
-    
+
 class LibraryMembershipDataCollector:
     def __init__(self, text_path):
         self.text_path = text_path
@@ -63,6 +62,9 @@ class LibraryMembershipDataCollector:
             collection.add(documents=[chunk], embeddings=[embedding], ids=[str(i)])
 
         return collection    
+
+
+
 
     def _extract_membership_types(self, context):
         membership_types = []
