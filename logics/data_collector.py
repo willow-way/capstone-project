@@ -3,6 +3,12 @@ from chromadb.config import Settings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from helper_functions.llm import get_completion, get_embedding
 
+# Attempt to use pysqlite3 instead of sqlite3
+try:
+    import pysqlite3 as sqlite3
+except ImportError:
+    import sqlite3  # Fallback to sqlite3 if pysqlite3 is not available
+    
 class LibraryMembershipDataCollector:
     def __init__(self, text_path):
         self.text_path = text_path
