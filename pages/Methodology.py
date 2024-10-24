@@ -22,6 +22,6 @@ LibConnect uses advanced Natural Language Processing and Machine Learning to pro
 st.subheader("Methodology")
 
 # Display static images
-#st.image("data/image1.jpg", caption="Methodology Image 1", use_column_width=True)
+st.image("data/methodology-chart.png", caption="Overall Methodology", use_column_width=True)
 #st.image("data/image2.jpg", caption="Methodology Image 2", use_column_width=True)
 # Add more images as needed
