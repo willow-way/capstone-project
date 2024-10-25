@@ -1,34 +1,15 @@
 import streamlit as st
 from logics.data_collector import LibraryMembershipDataCollector
-from logics.library_search import generate_search_url, handle_query_intent, extract_search_terms
-from logics.library_locations import load_library_locations, search_library_locations
-from helper_functions.llm import get_completion_by_messages
-from helper_functions.utility import check_password  # Import check_password function
-from logics.library_locations import prepare_library_context
-from logics.library_locations import load_library_locations, prepare_library_context
+from logics.library_search import generate_search_url, handle_query_intent
+from logics.library_locations import load_library_locations
 from helper_functions.llm import get_completion
-import pandas as pd  # Ensure Pandas is imported
-
+from helper_functions.utility import check_password
+from logics.library_locations import prepare_library_context
 
 # Configure Streamlit
-st.set_page_config(layout="centered", page_title="LibConnect - Discover . Connect . Learn")
+st.set_page_config(layout="centered", page_title="LibConnect - Discover . Search . Connect")
 
-st.title("LibConnect")
-
-import streamlit as st
-
-# Add a custom sidebar item
-st.sidebar.header("LibConnect")
-st.sidebar.markdown("""
-LibConnect is your virtual librarian, here to assist you with:
-
-1. **Book Search:** Find books and resources on specific topics.
-2. **Library Locations:** Get information about library branches.
-3. **Membership:** Learn about library membership options.
-4. **Instant Answers:** Get quick answers to your library-related questions.
-5. **Interactive Conversation:** Engage in a conversation with LibConnect.
-
-""")
+st.title("📚 LibConnect")
 
 # Ensure password authentication using utility function
 if not check_password():
@@ -44,56 +25,86 @@ libraries = load_library_locations('data/libraries.json')
 # Prepare library context
 library_context = prepare_library_context(libraries)
 
-# Initialize session states for context
+# Initialize session states for conversation history
 if 'conversation' not in st.session_state:
     st.session_state.conversation = []
 
+# Input sanitization to prevent prompt injection
+def sanitize_input(user_input):
+    blacklist = ["ignore all", "shutdown", "delete", "execute", "run", "ignore previous instructions"]
+    for word in blacklist:
+        if word in user_input.lower():
+            return "Input rejected due to suspicious content."
+    return user_input
+
+# Prompt chaining logic
+def handle_prompt_chain(user_query):
+    # Determine the type of user query (membership, search, location)
+    is_membership_query, is_search_query, is_location_query = handle_query_intent(user_query)
+    
+    context = "\n".join(st.session_state.conversation)  # Get conversation history as context
+
+    # Step 1: Handle Membership-related Queries
+    if is_membership_query:
+        prompt = (
+            "You are a helpful virtual librarian assistant. Here's detailed information about library memberships:\n"
+            f"{collector.membership_data}\n\n"
+            "Please answer the following membership query from the user:\n"
+            f"{user_query}\n"
+        )
+        return get_completion(prompt)
+
+    # Step 2: Handle Book Search Queries
+    if is_search_query:
+        search_url = generate_search_url(user_query)
+        prompt = (
+            "You are a helpful virtual librarian assistant. Here's how to search for books in the library:\n"
+            "1. A direct link to search for books on the topic.\n"
+            "2. A brief list of 2-3 popular or recommended books on the topic, if known. Include individual direct link to search these books.\n"
+            "3. Any digital resources or e-books related to the topic.\n\n"
+            f"User query: {user_query}\n\n"
+            f"Here’s the search link: {search_url}\n"
+        )
+        return get_completion(prompt)
+
+    # Step 3: Handle Location-related Queries
+    if is_location_query:
+        prompt = (
+            "You are a helpful virtual librarian assistant. Here's information about library locations:\n"
+            f"{library_context}\n\n"
+            "If the user is asking for directions, provide the nearest library information and a Google Maps link to that library.\n"
+            f"User query: {user_query}\n"
+        )
+        return get_completion(prompt)
+
+    # If no specific type matches, return a fallback response
+    return get_completion(f"Here’s the previous conversation context:\n{context}\n\nPlease answer the following query from a user:\n{user_query}\n")
+
 # Start the Streamlit form
 form = st.form(key="form")
-form.subheader("Discover . Connect . Learn")
+form.subheader("Discover . Search . Connect")
 
-user_query = form.text_area("Ask me anything about the library", height=200)
+user_query = form.text_area("How can I assist you today? Search for books, find library locations, or learn about memberships.", height=50)
 
-if form.form_submit_button("Submit"):
+if form.form_submit_button("**Submit**"):
     st.toast(f"User Query Submitted - {user_query}")
     st.divider()
 
     try:
-        # Generate search URL for books
-        search_url = generate_search_url(user_query)
+        # Sanitize user input
+        sanitized_query = sanitize_input(user_query)
+        if "Input rejected" in sanitized_query:
+            st.write(sanitized_query)
+        else:
+            # Handle prompt chaining and generate response
+            response = handle_prompt_chain(sanitized_query)
+            
+            # Display the response
+            st.write(response)
 
-        # Prepare the prompt for the LLM
-        prompt = f"""You are a helpful virtual librarian assistant. You have information about library memberships, locations, and resources. 
-
-        Here's information about library memberships:
-        {collector.membership_data}
-        
-        {library_context}
-        
-        When users ask about books on a specific topic, provide the following:
-        1. A direct link to search for books on that topic: {search_url}
-        2. A brief list of 2-3 popular or recommended books on the topic, if you know any.
-        3. Information about any digital resources or e-books the library might offer on the topic.
-        4. Encourage the user to visit the library or use the online catalogue for more options.
-
-        Please answer the following query from a user:
-        {user_query}
-        
-        If the query is about membership, provide relevant information about membership types, privileges, and fees.
-        If the query is about library locations, provide the specific information about the requested library, including its address and opening hours.
-        If the query contains multiple questions, answer all of them.
-        If you don't have the specific information requested, politely say so.
-        """
-
-        # Get response from LLM
-        response = get_completion(prompt)
-
-        # Display the response
-        st.write(response)
-
-        # Add to conversation history
-        st.session_state.conversation.append(f"User: {user_query}")
-        st.session_state.conversation.append(f"Assistant: {response}")
+            # Add user query and assistant response to session state
+            st.session_state.conversation.append(f"User: {sanitized_query}")
+            st.session_state.conversation.append(f"Assistant: {response}")
 
     except Exception as e:
         st.write(f"An error occurred: {str(e)}")
@@ -104,3 +115,15 @@ if form.form_submit_button("Submit"):
     st.write("**Conversation History:**")
     for idx, message in enumerate(st.session_state.conversation, 1):
         st.write(f"{idx}. {message}")
+
+# Add important notice below the text area
+with st.expander("**❗️Disclaimer**", expanded=False):
+    st.write("""
+             
+         
+    This web application is a prototype developed for educational purposes only. The information provided here is NOT intended for real-world usage and should not be relied upon for making any decisions, especially those related to financial, legal, or healthcare matters.
+
+    Furthermore, please be aware that the LLM may generate inaccurate or incorrect information. You assume full responsibility for how you use any generated output.
+    
+    Always consult with qualified professionals for accurate and personalized advice.
+    """)

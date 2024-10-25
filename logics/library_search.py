@@ -4,6 +4,7 @@ import re
 BASE_LIBRARY_URL = "https://search.nlb.gov.sg/onesearch/Search"
 
 def handle_query_intent(user_query):
+        # Define the conditions for different types of queries
     membership_terms = ["membership", "register", "join", "borrow", "renew", "loan", "rur", "repository", "enewspaper", "emagazine", "digital resource"]
     search_terms = ["book", "find", "search", "look for"]
     location_terms = ["library", "at", "in", "near"]
@@ -16,8 +17,8 @@ def handle_query_intent(user_query):
 
 def extract_search_terms(user_input):
     """Extract the main search keyword from user input focusing on book-related topics."""
-    # Strip unwanted phrases and focus on sections linked by 'books about', 'on', or 'for'
-    match = re.search(r'\b(?:books? (?:about|on|for)?|about|on|for)\s+([^\.,!?]+)', user_input, re.IGNORECASE)
+    # Improved regex to capture phrases that involve authors or book titles
+    match = re.search(r'\b(?:books? about|by|on|for|search for|find)\s+([^\.,!?]+)', user_input, re.IGNORECASE)
 
     if match:
         # Return the matched keyword that relates to the book search
@@ -26,14 +27,15 @@ def extract_search_terms(user_input):
     # Default case covers unmatched input
     return user_input.strip()
 
-def generate_search_url(query, content_type="book"):
+def generate_search_url(query):
+        # Use extract_search_terms to focus on the relevant parts
     search_term = extract_search_terms(query)
     if not search_term:
         raise ValueError("A valid search term must be provided.")
 
     search_params = {
-        "query": search_term,
-        "cont": content_type
+        "query": search_term,  # This should only be the relevant term
+        "cont": "book"
     }
 
     url_encoded_params = urllib.parse.urlencode(search_params)
