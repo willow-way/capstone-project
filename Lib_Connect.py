@@ -6,6 +6,7 @@ from helper_functions.llm import get_completion
 from helper_functions.utility import check_password
 from logics.library_locations import prepare_library_context
 
+
 # Configure Streamlit
 st.set_page_config(layout="centered", page_title="LibConnect - Discover . Search . Connect")
 
