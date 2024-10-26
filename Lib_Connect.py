@@ -40,10 +40,15 @@ def sanitize_input(user_input):
     return user_input
 
 def extract_keywords(query):
-    # List of words to ignore (generic terms related to book searching)
-    ignore_words = {"book", "books", "find", "show", "search", "for", "about", "of", "my", "the","recommend"}
-    
-    # Split query into words and filter out ignored words
+    # List of phrases and words to ignore
+    ignore_phrases = ["do you have", "can i find", "looking for", "look for"]
+    ignore_words = {"book", "books", "find", "show", "search", "for", "about", "of", "my", "the", "recommend"}
+
+    # Remove multi-word phrases from the query
+    for phrase in ignore_phrases:
+        query = query.lower().replace(phrase, "")
+
+    # Split the remaining query into words and filter out ignored words
     words = re.findall(r'\w+', query.lower())  # Extract words and convert to lowercase
     keywords = [word for word in words if word not in ignore_words]
     
@@ -80,14 +85,17 @@ def handle_prompt_chain(user_query):
             "You are a helpful virtual librarian assistant. Here’s how to search for books in the library:\n"
             f"Previous Conversation Context: {context}\n"  # Include previous context
             "1. A direct link to search for books on the topic.\n"
-            "2. A brief list of 2-3 popular or recommended books on the topic, if known. Include individual direct links to search these books using keywords from the user query.\n"
+            "2. A brief list of 2-3 popular or recommended books on the topic with brief description, if known. Include individual direct links to search these books using keywords from the user query.\n"
             #"3. Any digital resources or e-books related to the topic.\n\n"
             f"User Query: {user_query}\n"
             f"Extracted Keywords for Search: {refined_query}\n"
             f"Search Link: {search_url}\n"
+            
     )
+        print(refined_query)
         return get_completion(prompt)
-
+    
+    
     # Step 3: Handle Location-related Queries
     if is_location_query:
         # Check if a location context was provided earlier
@@ -126,7 +134,7 @@ form.subheader("Discover . Search . Connect")
 user_query = form.text_area("How can I assist you today? Search for books, find library locations, or learn about memberships.", height=50)
 
 if form.form_submit_button("**Submit**"):
-    st.toast(f"User Query Submitted - {user_query}")
+    #st.toast(f"User Query Submitted - {user_query}")
     st.divider()
 
     try:
@@ -228,3 +236,4 @@ with st.expander("**❗️Disclaimer**", expanded=False):
     
     Always consult with qualified professionals for accurate and personalized advice.
     """)
+
