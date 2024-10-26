@@ -41,7 +41,7 @@ def sanitize_input(user_input):
 
 def extract_keywords(query):
     # List of words to ignore (generic terms related to book searching)
-    ignore_words = {"book", "books", "find", "show", "search", "for", "about", "of", "my", "the"}
+    ignore_words = {"book", "books", "find", "show", "search", "for", "about", "of", "my", "the","recommend"}
     
     # Split query into words and filter out ignored words
     words = re.findall(r'\w+', query.lower())  # Extract words and convert to lowercase
