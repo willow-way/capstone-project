@@ -51,6 +51,7 @@ def extract_keywords(query):
 
 # Prompt chaining logic
 def handle_prompt_chain(user_query):
+    
     # Determine the type of user query (membership, search, location)
     is_membership_query, is_search_query, is_location_query = handle_query_intent(user_query)
 
@@ -80,7 +81,7 @@ def handle_prompt_chain(user_query):
             f"Previous Conversation Context: {context}\n"  # Include previous context
             "1. A direct link to search for books on the topic.\n"
             "2. A brief list of 2-3 popular or recommended books on the topic, if known. Include individual direct links to search these books using keywords from the user query.\n"
-            "3. Any digital resources or e-books related to the topic.\n\n"
+            #"3. Any digital resources or e-books related to the topic.\n\n"
             f"User Query: {user_query}\n"
             f"Extracted Keywords for Search: {refined_query}\n"
             f"Search Link: {search_url}\n"
@@ -109,7 +110,6 @@ def handle_prompt_chain(user_query):
                 "You are a helpful virtual librarian assistant. Here's information about library locations:\n"
                 f"{library_context}\n\n"
                 f"Previous Conversation Context: {context}\n"
-                "If the user is asking for directions, provide the nearest library information and a Google Maps link to that library.\n"
                 f"Current User Query: {user_query}\n"
             )
 
@@ -198,7 +198,7 @@ def make_links_clickable(text):
     return re.sub(url_pattern, r'[Link](\g<0>)', text)  # Format correctly using \g<0> to reference the whole match
 
 # Display Conversation History with Styling
-st.write("**Conversation History:**")
+st.write("**User Interaction History:**")
 chat_container = st.container()  # Create a container for the chat
 
 # Loop through the conversation in pairs and reverse the order

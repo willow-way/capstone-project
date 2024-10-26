@@ -11,21 +11,23 @@ st.title("Methodology")
 
 # Add the LibConnect description
 st.write("""
-LibConnect leverages advanced **Natural Language Processing (NLP)** and **Large Language Models (LLM)**
-          to provide users with an intuitive and intelligent interface for engaging with 
-         library resources. This page outlines the methodology, data flow, and technical 
-         details behind LibConnect’s functionality, emphasising how NLP and LLM capabilities 
-         power dynamic query handling, prompt chaining, and multi-turn conversations.
+LibConnect leverages Large Language Model (LLM) to provide users with an intuitive and 
+         intelligent interface for engaging with library resources. This page outlines the methodology, data flow, and technical 
+         details behind LibConnect’s functionality, emphasising how LLM capabilities power 
+         dynamic query handling, prompt chaining, and multi-turn conversations.
 """)
 
 st.markdown("""
     #### Overall Methodology
     LibConnect uses Python, Streamlit, and OpenAI’s GPT-4 for its LLM-based 
     processing. Each use case involves specific data sources and processing logic. 
-    Here's a breakdown of how NLP and LLM capabilities are applied in each use case:
+    Here's a breakdown of how LLM capabilities are applied in each use case:
             """)
 
-st.image("data/methodology-chart.png", caption="Overall Methodology", width=500)
+st.image("data/methodology-chart.png", caption="Overall Methodology for LibConnect", use_column_width=True)
+st.image("data/multistep_context.png", caption="Multi-Step Query Handling and Contextual Response Generation)", use_column_width=True)
+st.image("data/flowchart_bookrecommender.png", caption="Overall Methodology for Book Recommender", use_column_width=True)
+
 
 #st.title("")
 st.write("""
@@ -33,14 +35,13 @@ st.write("""
 The data flow in LibConnect revolves around three key components:
 
 **1. User Input**: The user submits a question or query through the app.\n
-**2. Natural Language Processing (NLP)**: The system uses NLP to analyze the query and detect 
-         its intent (e.g., book search, library location, or membership inquiry).\n
+**2. Intent Detection via Keyword Matching**: The system uses a keyword-based approach to analyze 
+         user queries and identify their intent, such as book search, library location inquiries, 
+         or membership-related questions. By scanning for specific terms associated with each intent, 
+         the system efficiently categorizes queries without relying on complex language models.\n
 **3. LLM-Driven Response Generation**: Based on the detected query intent, the LLM generates a 
          context-aware response, retrieving static data, and combining it with contextual 
          information to deliver accurate results.
-
-**Note**: NLP plays a crucial role in understanding and parsing user inputs, enabling the system to break down 
-         complex queries and detect multiple intents within a single user prompt.
 
 """)
 st.image("data/dataflow_booksearch.png", caption="Data Flow for Single Query (Book Search)", use_column_width=True)
@@ -57,11 +58,11 @@ st.markdown("""
     #### Key Implementation Details
 
 Each of the core use cases—Book Search, Library Location Search, and Membership Query involves 
-            distinct processing logic and data sources, leveraging NLP and LLM capabilities as follows:
+            distinct processing logic and data sources, leveraging LLM capabilities as follows:
             """)
 
 #Create tabs for easier nagivation
-tab1, tab2, tab3 = st.tabs(["**Book Search**", "**Library Location Search**", "**Membership Query**"])
+tab1, tab2, tab3, tab4 = st.tabs(["**Book Search**", "**Library Location Search**", "**Membership Query**", "**Book Recommender**"])
 
          
 #Content for Book Search Tab
@@ -71,7 +72,7 @@ with tab1:
     and LibConnect returns relevant book recommendations and links to the library catalogue.     
         
     """)
-    st.image("data/flowchart_booksearch.png", caption="Flowchart for Book Search", width=250)
+    st.image("data/flowchart_booksearch.png", caption="Flowchart for Book Search", width=450)
 
 #Content for Location Search Tab
 with tab2:
@@ -80,7 +81,7 @@ with tab2:
                     such as the address and, optionally, a Google Maps link for directions.   
         """)
 
-        st.image("data/flowchart_locationsearch.png", caption="Flowchart for Location Search", width=250)
+        st.image("data/flowchart_locationsearch.png", caption="Flowchart for Location Search", width=450)
 
 #Content for Membership Query Tab
 with tab3:
@@ -88,8 +89,13 @@ with tab3:
         This use case allows users to inquire about membership options, fees, and benefits. 
         """)
 
-        st.image("data/flowchart_membershipquery.png", caption="Flowchart for Memerbship Query", width=250)
+        st.image("data/flowchart_membershipquery.png", caption="Flowchart for Memerbship Query", use_column_width=True)
 
+with tab4:
+        st.markdown("""
+        This use case allows users to receive personalised book recommendations based on their chosen genre, like Fiction or Biography. 
+        """)
+        st.image("data/flowchart_bookrecommender.png", caption="Flowchart for Book Recommender", width=450)
 
 st.markdown("""
     #### LLM Capabilities

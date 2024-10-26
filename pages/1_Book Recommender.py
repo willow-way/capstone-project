@@ -6,7 +6,7 @@ from logics.library_search import generate_search_url
 # Configure the page
 st.set_page_config(layout="centered", page_title="Book Recommender")
 
-st.title("Book Recommender")
+st.title("✨Book Recommender")
 
 # Genre selection
 st.write("Select a genre or topic to receive book recommendations.")

@@ -14,8 +14,7 @@ st.subheader("Project Overview")
 
 st.write("""
 LibConnect is a virtual library assistant developed to offer users an intuitive, conversational 
-         interface for exploring library resources. By utilizing advanced Natural Language Processing 
-         (NLP) and OpenAI's GPT-4, LibConnect allows users to easily search for books, find nearby 
+         interface for exploring library resources. By utilizing Large Language Model (LLM), LibConnect allows users to easily search for books, find nearby 
          library branches, explore membership options, and obtain quick answers to library-related 
          queries. Built with Python and Streamlit, LibConnect combines the power of conversational 
          AI with a user-friendly design, delivering a smooth, personalized experience that enhances 
@@ -31,8 +30,8 @@ LibConnect aims to simplify access to library resources by enabling intuitive, n
          The main objectives include:        
 
 1. **Enhanced User Access**: Simplify the process for users to quickly retrieve essential library 
-         information, such as book searches, branch locations, and membership details, through 
-         natural language queries.
+         information, such as book searches, branch locations, and membership details in a single 
+         user-friendly interface.
 
 2. **Contextual Inteactions**: The assistant is designed to support context-aware conversations, 
          creating personalized and relevant responses that improve with each interaction.
@@ -66,12 +65,19 @@ LibConnect offers comprehensive guidance on library membership options, covering
          membership benefits, eligibility, and pricing. This allows users to make informed decisions 
          about joining the library and taking full advantage of available resources.
 
-4. **Instant Answers**\n
+4. **Book Recommender** \n
+Book Recommender allows users to receive personalised book recommendations 
+         based on their chosen genre, like Fiction or Biography. The feature 
+         generates tailored suggestions and provides direct links to the 
+         library catalogue, simplifying book discovery and enhancing user 
+         engagement with library resources.
+         
+5. **Instant Answers**\n
 LibConnect responds instantly to various library-related queries, from general questions to specific 
          needs like locating resources. By handling a wide array of question types, the assistant 
          serves as a versatile, go-to source for library information.
 
-5. **Conversational History**\n
+6. **Conversational History**\n
 The assistant keeps a session-based conversation history, allowing users to ask follow-up questions 
          and continue the dialogue without needing to rephrase or re-explain their queries. This feature 
          enhances the experience by enabling multi-turn conversations.

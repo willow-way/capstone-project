@@ -3,7 +3,7 @@ import streamlit as st
 # Configure the page title and layout
 #st.set_page_config(page_title="Using LibConnect: A Quick Guide", layout="centered")
 
-st.subheader("ℹ️ A Quick Guide")
+st.subheader("ℹ️ Lib Connect - A Quick Guide")
 #st.subheader("Your Virtual Librarian Assistant")
 
 st.write("""

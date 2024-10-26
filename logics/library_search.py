@@ -6,8 +6,8 @@ BASE_LIBRARY_URL = "https://search.nlb.gov.sg/onesearch/Search"
 def handle_query_intent(user_query):
         # Define the conditions for different types of queries
     membership_terms = ["membership", "register", "join", "borrow", "renew", "loan", "rur", "repository", "enewspaper", "emagazine", "digital resource"]
-    search_terms = ["book", "find", "search", "look for"]
-    location_terms = ["library", "at", "in", "near"]
+    search_terms = ["book", "find", "search", "look for", "catalogue", "catalog", "books", "book search", "book searches"]
+    location_terms = ["library", "at", "in", "near", "libraries", "nearby", "location", "locations"]
 
     is_membership_query = any(term in user_query.lower() for term in membership_terms)
     is_search_query = any(term in user_query.lower() for term in search_terms)
