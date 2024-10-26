@@ -1,3 +1,4 @@
+# Import Streamlit library
 import streamlit as st
 
 # region <--------- Streamlit App Configuration --------->
@@ -7,6 +8,7 @@ st.set_page_config(
 )
 # endregion <--------- Streamlit App Configuration --------->
 
+# **App Title**: Set the main title of the "Methodology" page
 st.title("Methodology")
 
 # Add the LibConnect description
@@ -17,6 +19,7 @@ LibConnect leverages Large Language Model (LLM) to provide users with an intuiti
          dynamic query handling, prompt chaining, and multi-turn conversations.
 """)
 
+# **Methodology Section**: Provide an overview of the methodology behind LibConnect
 st.markdown("""
     #### Overall Methodology
     LibConnect uses Python, Streamlit, and OpenAI’s GPT-4 for its LLM-based 
@@ -29,7 +32,7 @@ st.image("data/multistep_context.png", caption="Multi-Step Query Handling and Co
 st.image("data/flowchart_bookrecommender.png", caption="Overall Methodology for Book Recommender", use_column_width=True)
 
 
-#st.title("")
+
 st.write("""
 #### Data Flow Overview
 The data flow in LibConnect revolves around three key components:

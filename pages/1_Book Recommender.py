@@ -1,3 +1,4 @@
+# Import necessary libraries
 import re
 import streamlit as st
 from helper_functions.llm import get_completion
@@ -6,9 +7,10 @@ from logics.library_search import generate_search_url
 # Configure the page
 st.set_page_config(layout="centered", page_title="Book Recommender")
 
+# **App Title**: Set the main title of the "Book Recommender" page
 st.title("✨Book Recommender")
 
-# Genre selection
+# **Genre Selection**: Allow users to select a genre or topic for book recommendations
 st.write("Select a genre or topic to receive book recommendations.")
 genre_options = ["Biography", "Fiction", "Non-Fiction", "Science", "History", "Philosophy", "Mystery", "Fantasy"]
 user_genre = st.selectbox("Select Genre:", genre_options)

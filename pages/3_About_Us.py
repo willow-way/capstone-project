@@ -1,17 +1,19 @@
+# Import Streamlit library
 import streamlit as st
 
 # region <--------- Streamlit App Configuration --------->
+# Configure the Streamlit app layout and title
 st.set_page_config(
     layout="centered",
     page_title="LibConnect - Discover . Connect . Learn"
 )
 # endregion <--------- Streamlit App Configuration --------->
 
+# **App Title**: Set the main title of the "About Us" page
 st.title("About Us")
 
-# Add LibConnect Project Overview
+# **Project Overview Section**: Provide an overview of LibConnect's purpose and capabilities
 st.subheader("Project Overview")
-
 st.write("""
 LibConnect is a virtual library assistant developed to offer users an intuitive, conversational 
          interface for exploring library resources. By utilizing Large Language Model (LLM), LibConnect allows users to easily search for books, find nearby 
@@ -21,7 +23,7 @@ LibConnect is a virtual library assistant developed to offer users an intuitive,
          how users connect with their library.
 """)
 
-# Objectives Section
+# **Objectives Section**: Outline the main objectives of LibConnect
 st.subheader("Objectives")
 st.write("""
 LibConnect aims to simplify access to library resources by enabling intuitive, natural language 
@@ -46,7 +48,7 @@ LibConnect aims to simplify access to library resources by enabling intuitive, n
 
 """)
 
-# Features Section
+# **Features Section**: Describe key features that LibConnect offers to users
 st.subheader("Features")
 st.write("""
 1. **Book Search**\n
@@ -83,7 +85,7 @@ The assistant keeps a session-based conversation history, allowing users to ask 
          enhances the experience by enabling multi-turn conversations.
 """)
 
-# Data Sources Section
+# **Data Sources Section**: Describe the types of data that LibConnect relies on
 st.subheader("Data Sources")
 st.write("""
 LibConnect operates on a combination of static data and user input to provide accurate and relevant information. The primary data sources include:

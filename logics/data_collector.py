@@ -1,12 +1,14 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from helper_functions.llm import get_completion, get_embedding
 
+# **Library Membership Data Collector Class**: Collect and process library membership data
 class LibraryMembershipDataCollector:
     def __init__(self, text_path):
         self.text_path = text_path
         self.membership_data = self._load_membership_data()
         self.vector_store = self._process_membership_data()  # Directly store processed data
 
+# **Load Membership Data Function**: Read membership data from a text file
     def _load_membership_data(self):
         """Load membership data from the specified text file."""
         try:
@@ -17,6 +19,7 @@ class LibraryMembershipDataCollector:
         except FileNotFoundError:
             raise FileNotFoundError("membership.txt file not found in data folder.")
 
+# **Process Membership Data Function**: Split and embed membership data
     def _process_membership_data(self):
         """Process the loaded membership data into vector embeddings."""
         text_splitter = RecursiveCharacterTextSplitter(
@@ -50,6 +53,7 @@ class LibraryMembershipDataCollector:
 
         return processed_data  # Return the processed data
 
+# **Extract Membership Types Function**: Extract membership types from the context
     def _extract_membership_types(self, context):
         membership_types = []
         for line in context.split('\n'):

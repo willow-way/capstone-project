@@ -1,3 +1,4 @@
+# Import necessary libraries and functions
 import streamlit as st
 import re
 from logics.data_collector import LibraryMembershipDataCollector
@@ -8,30 +9,29 @@ from helper_functions.utility import check_password
 from logics.library_locations import prepare_library_context
 
 
-# Configure Streamlit
+# Configure Streamlit page layout and title
 st.set_page_config(layout="centered", page_title="LibConnect - Discover . Search . Connect")
-
 st.title("📚 LibConnect")
 
-# Ensure password authentication using utility function
+# **Authentication Check**: Verify access using password utility; halt if authentication fails
 if not check_password():
     st.stop()
 
-# Load membership data
+# **Load Membership Data**: Instantiate LibraryMembershipDataCollector to manage membership info
 text_path = 'data/membership.txt'
 collector = LibraryMembershipDataCollector(text_path)
 
-# Load library locations
+# **Load Library Locations**: Import library location data from JSON file
 libraries = load_library_locations('data/libraries.json')
 
-# Prepare library context
+# **Prepare Library Context**: Format library location data for query processing
 library_context = prepare_library_context(libraries)
 
-# Initialize session states for conversation history
+# **Initialize Conversation History**: Establish session state to store conversation flow
 if 'conversation' not in st.session_state:
     st.session_state.conversation = []
 
-# Input sanitization to prevent prompt injection
+# **Input Sanitization**: Prevent prompt injection attacks by filtering certain commands
 def sanitize_input(user_input):
     blacklist = ["ignore all", "shutdown", "delete", "execute", "run", "ignore previous instructions"]
     for word in blacklist:
@@ -39,6 +39,7 @@ def sanitize_input(user_input):
             return "Input rejected due to suspicious content."
     return user_input
 
+# **Keyword Extraction Function**: Remove common phrases and terms for clean keyword extraction
 def extract_keywords(query):
     # List of phrases and words to ignore
     ignore_phrases = ["do you have", "can i find", "looking for", "look for"]
@@ -54,16 +55,16 @@ def extract_keywords(query):
     
     return " ".join(keywords)
 
-# Prompt chaining logic
+# **Prompt Chaining Logic**: Handle different types of user queries (membership, search, location)
 def handle_prompt_chain(user_query):
     
-    # Determine the type of user query (membership, search, location)
+    # **Identify Query Type**: Determine if the query is about membership, search, or location
     is_membership_query, is_search_query, is_location_query = handle_query_intent(user_query)
 
-    # Prepare context from conversation history
+    # **Contextualize with Conversation History**: Use previous messages as context
     context = "\n".join(st.session_state.conversation)  # Get conversation history as context
 
-    # Step 1: Handle Membership-related Queries
+    # **Membership Queries**: Generate response based on membership data
     if is_membership_query:
         prompt = (
             "You are a helpful virtual librarian assistant. Here's detailed information about library memberships:\n"
@@ -74,13 +75,13 @@ def handle_prompt_chain(user_query):
         )
         return get_completion(prompt)
 
-    # Step 2: Handle Book Search Queries
+    # **Book Search Queries**: Generate search results and relevant book suggestions
     if is_search_query:
         # Extract keywords from the user query
         refined_query = extract_keywords(user_query)
         search_url = generate_search_url(refined_query)  # Use refined query for search URL
         
-        # Now construct the prompt with refined keywords
+        # Prompt with detailed guidance on book search and suggestions
         prompt = (
             "You are a helpful virtual librarian assistant. Here’s how to search for books in the library:\n"
             f"Previous Conversation Context: {context}\n"  # Include previous context
@@ -96,7 +97,7 @@ def handle_prompt_chain(user_query):
         return get_completion(prompt)
     
     
-    # Step 3: Handle Location-related Queries
+    # **Location Queries**: Respond based on user’s location and previous context
     if is_location_query:
         # Check if a location context was provided earlier
         previous_location = None
@@ -105,7 +106,7 @@ def handle_prompt_chain(user_query):
                 previous_location = message.split()[-1]  # Extract the postal code, assuming it's the last word
                 break
 
-        # Provide a more informed answer based on previous location
+        # Construct response, considering previous location if available
         if previous_location:
             prompt = (
                 "You are a helpful virtual librarian assistant. Here's information about library locations:\n"
@@ -123,11 +124,11 @@ def handle_prompt_chain(user_query):
 
         return get_completion(prompt)
 
-    # If no specific type matches, return a fallback response
+    # **Fallback Response**: General response if query type is not identified
     return get_completion(f"Here’s the previous conversation context:\n{context}\n\nPlease answer the following query from a user:\n{user_query}\n")
 
 
-# Start the Streamlit form
+# **Streamlit Form**: Create user input form for query submission
 form = st.form(key="form")
 form.subheader("Discover . Search . Connect")
 
@@ -138,15 +139,15 @@ if form.form_submit_button("**Submit**"):
     st.divider()
 
     try:
-        # Sanitize user input
+        # **Sanitize User Query**: Filter suspicious content
         sanitized_query = sanitize_input(user_query)
         if "Input rejected" in sanitized_query:
             st.write(sanitized_query)
         else:
-            # Handle prompt chaining and generate response
+            # **Handle Prompt Chaining**: Generate a response based on user query
             response = handle_prompt_chain(sanitized_query)
             
-            # Display the response
+            # Display the response and update session conversation history
             st.write(response)
 
             # Add user query and assistant response to session state
@@ -158,7 +159,7 @@ if form.form_submit_button("**Submit**"):
 
     st.divider()
 
-# Add custom CSS for chat bubbles enhancing visual appearance for seamless chatting
+# **Custom Chat Styling**: Enhance chat display with CSS for user and assistant bubbles
 st.markdown(
     """
     <style>
@@ -199,13 +200,12 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Function to detect raw URLs and convert them to clickable Markdown links
+# **Clickable Links in Assistant Messages**: Detect URLs and format as clickable Markdown links
 def make_links_clickable(text):
-    # This will match raw URLs and format them as Markdown clickable links
     url_pattern = r'https?://\S+'
-    return re.sub(url_pattern, r'[Link](\g<0>)', text)  # Format correctly using \g<0> to reference the whole match
+    return re.sub(url_pattern, r'[Link](\g<0>)', text)  
 
-# Display Conversation History with Styling
+# **Display Conversation History**: Format and display past interactions
 st.write("**User Interaction History:**")
 chat_container = st.container()  # Create a container for the chat
 
@@ -215,25 +215,15 @@ for idx in range(len(st.session_state.conversation) - 1, 0, -2):  # Step backwar
         user_message = st.session_state.conversation[idx - 1].replace("User:", "").strip()
         assistant_message = st.session_state.conversation[idx].replace("Assistant:", "").strip()
 
-        # Display User message in a bubble
-        st.markdown(f"<div class='user-bubble'>User: {user_message}</div>", unsafe_allow_html=True)
-
-        # Display Assistant message in a bubble
-        # Format the assistant message properly for clickable links
+        # Display user and assistant messages with custom bubble formatting
+        st.markdown(f"<div class='user-bubble'>User: {user_message}</div>", unsafe_allow_html=True)        
         st.markdown(f"<div class='assistant-bubble'>Assistant: {assistant_message}</div>", unsafe_allow_html=True)
-
-        # Add a separator for better visual distinction
         st.markdown("<hr>", unsafe_allow_html=True)  # Optional horizontal line separator
 
-# Add important notice below the text area
+# **Disclaimer**: Note about app’s limitations and usage intent
 with st.expander("**❗️Disclaimer**", expanded=False):
-    st.write("""
-             
-         
+    st.write("""                      
     This web application is a prototype developed for educational purposes only. The information provided here is NOT intended for real-world usage and should not be relied upon for making any decisions, especially those related to financial, legal, or healthcare matters.
-
-    Furthermore, please be aware that the LLM may generate inaccurate or incorrect information. You assume full responsibility for how you use any generated output.
-    
+    Furthermore, please be aware that the LLM may generate inaccurate or incorrect information. You assume full responsibility for how you use any generated output.    
     Always consult with qualified professionals for accurate and personalized advice.
     """)
-

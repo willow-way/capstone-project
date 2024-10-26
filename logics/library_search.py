@@ -1,8 +1,11 @@
+# Import necessary libraries
 import urllib.parse
 import re
 
+# **Library Search Function**: Generate search URL for a given query
 BASE_LIBRARY_URL = "https://search.nlb.gov.sg/onesearch/Search"
 
+# **Handle Query Intent Function**: Identify the type of query and generate appropriate response
 def handle_query_intent(user_query):
         # Define the conditions for different types of queries
     membership_terms = ["membership", "register", "join", "borrow", "renew", "loan", "rur", "repository", "enewspaper", "emagazine", "digital resource"]
@@ -20,6 +23,7 @@ def handle_query_intent(user_query):
 
     return is_membership_query, is_search_query, is_location_query
 
+# **Extract Search Terms Function**: Extract the main search keyword from user input
 def extract_search_terms(user_input):
     """Extract the main search keyword from user input focusing on book-related topics."""
     # Improved regex to capture phrases that involve authors or book titles
@@ -32,6 +36,7 @@ def extract_search_terms(user_input):
     # Default case covers unmatched input
     return user_input.strip()
 
+# **Generate Search URL Function**: Generate the search URL for a given query
 def generate_search_url(query):
         # Use extract_search_terms to focus on the relevant parts
     search_term = extract_search_terms(query)
