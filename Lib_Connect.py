@@ -79,7 +79,7 @@ def handle_prompt_chain(user_query):
             "You are a helpful virtual librarian assistant. Here’s how to search for books in the library:\n"
             f"Previous Conversation Context: {context}\n"  # Include previous context
             "1. A direct link to search for books on the topic.\n"
-            "2. A brief list of 2-3 popular or recommended books on the topic, if known. Include individual direct links to search these books.\n"
+            "2. A brief list of 2-3 popular or recommended books on the topic, if known. Include individual direct links to search these books using keywords from the user query.\n"
             "3. Any digital resources or e-books related to the topic.\n\n"
             f"User Query: {user_query}\n"
             f"Extracted Keywords for Search: {refined_query}\n"
