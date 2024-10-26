@@ -72,7 +72,7 @@ with tab1:
     and LibConnect returns relevant book recommendations and links to the library catalogue.     
         
     """)
-    st.image("data/flowchart_booksearch.png", caption="Flowchart for Book Search", width=450)
+    st.image("data/flowchart_booksearch.png", caption="Flowchart for Book Search", use_column_width=True)
 
 #Content for Location Search Tab
 with tab2:
@@ -81,7 +81,7 @@ with tab2:
                     such as the address and, optionally, a Google Maps link for directions.   
         """)
 
-        st.image("data/flowchart_locationsearch.png", caption="Flowchart for Location Search", width=450)
+        st.image("data/flowchart_locationsearch.png", caption="Flowchart for Location Search", use_column_width=True)
 
 #Content for Membership Query Tab
 with tab3:
@@ -95,7 +95,7 @@ with tab4:
         st.markdown("""
         This use case allows users to receive personalised book recommendations based on their chosen genre, like Fiction or Biography. 
         """)
-        st.image("data/flowchart_bookrecommender.png", caption="Flowchart for Book Recommender", width=450)
+        st.image("data/flowchart_bookrecommender.png", caption="Flowchart for Book Recommender", use_column_width=True)
 
 st.markdown("""
     #### LLM Capabilities
