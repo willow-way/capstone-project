@@ -7,7 +7,7 @@ def load_library_locations(file_path):
         return json.load(file)
 
 def prepare_library_context(libraries):
-    context = "Here's a list of our libraries:\n\n"
+    context = "Here's a list of our libraries with their addresses and operating hours:\n\n"
     for library in libraries:
         context += f"- {library['name']}: {library['address']}\n"
     return context
