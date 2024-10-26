@@ -11,14 +11,22 @@ st.title("Methodology")
 
 # Add the LibConnect description
 st.write("""
-LibConnect leverages advanced Natural Language Processing (NLP) and Large Language Models (LLM)
+LibConnect leverages advanced **Natural Language Processing (NLP)** and **Large Language Models (LLM)**
           to provide users with an intuitive and intelligent interface for engaging with 
          library resources. This page outlines the methodology, data flow, and technical 
-         details behind LibConnect’s functionality, emphasizing how NLP and LLM capabilities 
+         details behind LibConnect’s functionality, emphasising how NLP and LLM capabilities 
          power dynamic query handling, prompt chaining, and multi-turn conversations.
 """)
 
-# Add images of the methodology
+st.markdown("""
+    #### Overall Methodology
+    LibConnect uses Python, Streamlit, and OpenAI’s GPT-4 for its LLM-based 
+    processing. Each use case involves specific data sources and processing logic. 
+    Here's a breakdown of how NLP and LLM capabilities are applied in each use case:
+            """)
+
+st.image("data/methodology-chart.png", caption="Overall Methodology", width=500)
+
 #st.title("")
 st.write("""
 #### Data Flow Overview
@@ -31,7 +39,7 @@ The data flow in LibConnect revolves around three key components:
          context-aware response, retrieving static data, and combining it with contextual 
          information to deliver accurate results.
 
-NLP plays a crucial role in understanding and parsing user inputs, enabling the system to break down 
+**Note**: NLP plays a crucial role in understanding and parsing user inputs, enabling the system to break down 
          complex queries and detect multiple intents within a single user prompt.
 
 """)
@@ -45,23 +53,53 @@ In addition to handling single-step queries, LibConnect also supports **Multi-St
 
 st.image("data/dataflow_multichain.png", caption="Data Flow for Multi-Step Query", use_column_width=True)
 
+st.markdown("""
+    #### Key Implementation Details
+
+Each of the core use cases—Book Search, Library Location Search, and Membership Query involves 
+            distinct processing logic and data sources, leveraging NLP and LLM capabilities as follows:
+            """)
+
+#Create tabs for easier nagivation
+tab1, tab2, tab3 = st.tabs(["**Book Search**", "**Library Location Search**", "**Membership Query**"])
+
+         
+#Content for Book Search Tab
+with tab1:
+    st.markdown("""
+    In the book search use case, users can ask questions about available books on specific topics, 
+    and LibConnect returns relevant book recommendations and links to the library catalogue.     
+        
+    """)
+    st.image("data/flowchart_booksearch.png", caption="Flowchart for Book Search", width=250)
+
+#Content for Location Search Tab
+with tab2:
+        st.markdown("""
+        Users can also request information about library branch locations. The system provides details 
+                    such as the address and, optionally, a Google Maps link for directions.   
+        """)
+
+        st.image("data/flowchart_locationsearch.png", caption="Flowchart for Location Search", width=250)
+
+#Content for Membership Query Tab
+with tab3:
+        st.markdown("""
+        This use case allows users to inquire about membership options, fees, and benefits. 
+        """)
+
+        st.image("data/flowchart_membershipquery.png", caption="Flowchart for Memerbship Query", width=250)
 
 
 st.markdown("""
-#### Key Implementation Details
-LibConnect uses Python, Streamlit, and OpenAI’s GPT-4 for its LLM-based 
-processing. Each use case involves specific data sources and processing logic. 
-Here's a breakdown of how NLP and LLM capabilities are applied in each use case:
+    #### LLM Capabilities
+LibConnect employs prompt engineering techniques to enable intelligent interactions. Here’s how the LLM capabilities are applied:
 
-##### 1. Book Seach Use Case
-In the book search use case, users can ask questions about available books on specific topics, 
-and LibConnect returns relevant book recommendations and links to the library catalog.     
-    
-""")
-st.image("data/flowchart_booksearch.png", caption="Flowchart for Book Search Use Case", width=250)
+**Prompt Chaining**: For complex, multi-step queries, the LLM uses the output from one query as input for the next. This allows for sequential processing of requests, such as answering a question about membership and then recommending books based on the user's membership status.
 
+**Context-Aware Conversations**: LibConnect maintains the context of previous user interactions. This enables multi-turn conversations, where the assistant builds on previous responses to provide more personalized and relevant information.
 
-# Display static images
-st.image("data/methodology-chart.png", caption="Overall Methodology", width=500)
-#st.image("data/image2.jpg", caption="Methodology Image 2", use_column_width=True)
-# Add more images as needed
+**Dynamic Query Handling**: The LLM is responsible for identifying the user’s intent (book search, location inquiry, membership) and generating accurate responses tailored to the query type.
+
+            """)
+
