@@ -42,8 +42,15 @@ def sanitize_input(user_input):
 # **Keyword Extraction Function**: Remove common phrases and terms for clean keyword extraction
 def extract_keywords(query):
     # List of phrases and words to ignore
-    ignore_phrases = ["do you have", "can i find", "looking for", "look for"]
-    ignore_words = {"book", "books", "find", "show", "search", "for", "about", "of", "my", "the", "recommend"}
+    ignore_phrases = [
+            "do you have", "can i find", "looking for", "look for", "i am", 
+            "could you", "would you", "please", "show me", "tell me", 
+            "give me", "i need", "i want", "is there", "can you", "help me with", "can i get"
+        ]
+    ignore_words = {
+            "book", "books", "find", "show", "search", "for", "about", "of", "my", "the", 
+            "recommend", "need", "want", "available", "some", "any", "all", "me"
+        }
 
     # Remove multi-word phrases from the query
     for phrase in ignore_phrases:
