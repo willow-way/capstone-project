@@ -11,14 +11,17 @@ def load_library_locations(file_path):
 
 # **Prepare Library Context Function**: Format library locations for display
 def prepare_library_context(libraries):
-
-    # Initialize context with a description header    
     context = "Here's a list of our libraries with their addresses and operating hours:\n\n"
-
-    # Loop through libraries and add each library's name and address to the context
     for library in libraries:
-        context += f"- {library['name']}: {library['address']}\n"
+        context += f"- {library['name']}\n  Address: {library['address']}\n  Opening Hours: {library['opening_hours']['general']}\n"
+        
+        # Include exceptions if available
+        if 'exceptions' in library['opening_hours']:
+            context += "  Exceptions: " + "; ".join(library['opening_hours']['exceptions']) + "\n"
+        context += "\n"  # Add spacing for readability
+    
     return context
+
 
 # **Search Library Locations Function**: Find libraries that match the user query
 def search_library_locations(user_query, libraries):

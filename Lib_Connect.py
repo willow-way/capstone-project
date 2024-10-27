@@ -45,11 +45,11 @@ def extract_keywords(query):
     ignore_phrases = [
             "do you have", "can i find", "looking for", "look for", "i am", 
             "could you", "would you", "please", "show me", "tell me", 
-            "give me", "i need", "i want", "is there", "can you", "help me with", "can i get"
+            "give me", "i need", "i want", "is there", "can you", "help me with", "can i get", "you would"
         ]
     ignore_words = {
             "book", "books", "find", "show", "search", "for", "about", "of", "my", "the", 
-            "recommend", "need", "want", "available", "some", "any", "all", "me"
+            "recommend", "need", "want", "available", "some", "any", "all", "me", "that"
         }
 
     # Remove multi-word phrases from the query
@@ -116,20 +116,22 @@ def handle_prompt_chain(user_query):
         # Construct response, considering previous location if available
         if previous_location:
             prompt = (
-                "You are a helpful virtual librarian assistant. Here's information about library locations:\n"
+                "You are a helpful virtual librarian assistant. Here's detailed information about library locations, including their specific opening hours:\n"
                 f"{library_context}\n\n"
-                f"I see you mentioned being at postal code {previous_location} earlier. Let me find the nearest library for you.\n"
+                f"I see you mentioned being at postal code {previous_location} earlier. Based on this, let me find the nearest library for you, including their opening hours.\n"
                 f"Current User Query: {user_query}\n"
             )
         else:
             prompt = (
-                "You are a helpful virtual librarian assistant. Here's information about library locations:\n"
+                "You are a helpful virtual librarian assistant. Here's detailed information about library locations, including their specific opening hours:\n"
                 f"{library_context}\n\n"
                 f"Previous Conversation Context: {context}\n"
                 f"Current User Query: {user_query}\n"
             )
 
         return get_completion(prompt)
+
+
 
     # **Fallback Response**: General response if query type is not identified
     return get_completion(f"Here’s the previous conversation context:\n{context}\n\nPlease answer the following query from a user:\n{user_query}\n")
